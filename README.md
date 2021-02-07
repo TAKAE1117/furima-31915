@@ -2,18 +2,16 @@
 
 ## users テーブル
 
-| Column           | Type    | Options     |
-| ---------------- | ------- | ----------- |
-| email            | string  | null: false |
-| password         | string  | null: false |
-| nickname         | string  | null: false |
-| last_name_kanji  | string  | null: false |
-| first_name_kanji | string  | null: false |
-| last_name_kana   | string  | null: false |
-| first_name_kana  | string  | null: false |
-| birthday_year    | integer | null: false |
-| birthday_month   | integer | null: false |
-| birthday_day     | integer | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| email              | string  | null: false |
+| encrypted_password | string  | null: false |
+| nickname           | string  | null: false |
+| last_name_kanji    | string  | null: false |
+| first_name_kanji   | string  | null: false |
+| last_name_kana     | string  | null: false |
+| first_name_kana    | string  | null: false |
+| birthday           | data    | null: false |
 
 ### Association
 
@@ -22,23 +20,21 @@
 
 ## items テーブル
 
-| Column      | Type           | Options     |
-| ----------- | -------------- | ----------- |
-| image       | Active Storage |             |
-| title       | text           | null: false |
-| description | text           | null: false |
-| category    | text           | null: false |
-| state       | text           | null: false |
-| fee         | text           | null: false |
-| area        | text           | null: false |
-| days        | text           | null: false |
-| price       | text           | null: false |
-| user        | references     |             |
+| Column       | Type       | Options           |
+| ------------ | ---------- | ----------------- |
+| title        | string     | null: false       |
+| description  | text       | null: false       |
+| category _id | integer    | null: false       |
+| state_id     | integer    | null: false       |
+| fee_id       | integer    | null: false       |
+| area_id      | integer    | null: false       |
+| day_id       | integer    | null: false       |
+| price        | integer    | null: false       |
+| user         | references | foreign_key :true |
 
 ### Association
 
 - belongs_to :user
-- has_one :address
 - has_one :purchase
 
 ## purchases テーブル
@@ -58,14 +54,13 @@
 
 | Column        | Type    | Options     |
 | ------------- | ------- | ----------- |
-| postal_code   | text    | null: false |
-| prefectures   | text    | null: false |
-| municipality  | text    | null: false |
-| address       | text    | null: false |
-| building_name | text    |             |
-| phone_number  | integer | null: false |
+| postal_code   | string  | null: false |
+| prefecture_id | integer | null: false |
+| municipality  | string  | null: false |
+| address       | string  | null: false |
+| building_name | string  |             |
+| phone_number  | string  | null: false |
 
 ### Association
 
-- belongs_to :item
 - belongs_to :purchase
