@@ -30,16 +30,15 @@ class Item < ApplicationRecord
     validates :day_id
   end
 
-  # with_options presence: true do
-  #   validates :price, format: { with: greater_than_or_equal_to: 300, message: "aaa" }
-  # end
+  with_options numericality: { greater_than_or_equal_to: 300 } do
+    validates :price
+  end
 
-  # with_options format: { with: less_than_or_equal_to: 9999999 } do
-  #   validates :price
-  # end
+  with_options numericality: { less_than_or_equal_to: 9_999_999 } do
+    validates :price
+  end
 
   with_options format: { with: /\A[0-9]+\z/ } do
     validates :price
   end
-
 end

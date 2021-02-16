@@ -6,10 +6,9 @@ class State < ActiveHash::Base
     { id: 4, state: '目立った傷や汚れなし' },
     { id: 5, state: 'やや傷や汚れあり' },
     { id: 6, state: '傷や汚れあり' },
-    { id: 7, state: '全体的に状態が悪い' },
+    { id: 7, state: '全体的に状態が悪い' }
   ]
 
   include ActiveHash::Associations
   has_many :items
-  
 end

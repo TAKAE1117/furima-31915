@@ -47,10 +47,9 @@ class Area < ActiveHash::Base
     { id: 45, area: '大分県' },
     { id: 46, area: '宮崎県' },
     { id: 47, area: '鹿児島県' },
-    { id: 48, area: '沖縄県' },
+    { id: 48, area: '沖縄県' }
   ]
 
   include ActiveHash::Associations
   has_many :items
-  
 end

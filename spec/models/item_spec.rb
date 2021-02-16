@@ -6,7 +6,6 @@ RSpec.describe Item, type: :model do
   end
 
   describe '商品出品機能' do
-
     context '出品が出来る場合' do
       it '商品画像があれば出品できる' do
         expect(@item).to be_valid
@@ -37,7 +36,7 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
       it '価格が¥300〜¥9,999,999の範囲であれば出品できる' do
-        
+        expect(@item).to be_valid
       end
     end
 
@@ -60,27 +59,27 @@ RSpec.describe Item, type: :model do
       it 'カテゴリーidが1の場合出品できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
       it '商品の状態idが1の場合出品できない' do
         @item.state_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("State must be other than 1")
+        expect(@item.errors.full_messages).to include('State must be other than 1')
       end
       it '配送料idが1の場合出品できない' do
         @item.fee_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Fee must be other than 1")
+        expect(@item.errors.full_messages).to include('Fee must be other than 1')
       end
       it '発送元の地域idが1の場合出品できない' do
         @item.area_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Area must be other than 1")
+        expect(@item.errors.full_messages).to include('Area must be other than 1')
       end
       it '発送までの日数idが1の場合出品できない' do
         @item.day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Day must be other than 1")
+        expect(@item.errors.full_messages).to include('Day must be other than 1')
       end
       it '価格が平仮名・カタカナ・漢字・英字の場合出品できない' do
         @item.price = 'あいうえお'
@@ -88,14 +87,22 @@ RSpec.describe Item, type: :model do
         @item.price = '亜井于絵尾'
         @item.price = 'aiueo'
         @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格が¥300〜¥9,999,999の範囲でなければ出品できない' do
+        @item.price = '150'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
+      end
+      it '価格が¥300〜¥9,999,999の範囲でなければ出品できない' do
+        @item.price = '1000000000'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
+      end
+      it 'ユーザーが紐付いてなければ出品できない' do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
-      end
-      it 'ユーザーが紐付いてなければ出品できない' do
-        
       end
     end
   end
