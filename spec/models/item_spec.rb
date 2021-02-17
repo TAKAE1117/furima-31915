@@ -57,14 +57,6 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Day must be other than 1')
       end
-      # it '価格が平仮名・カタカナ・漢字・英字の場合出品できない' do
-      #   @item.price = 'あいうえお'
-      #   @item.price = 'アイウエオ'
-      #   @item.price = '亜井于絵尾'
-      #   @item.price = 'aiueo'
-      #   @item.valid?
-      #   expect(@item.errors.full_messages).to include('Price is not a number')
-      # end
       it '価格が全角平仮名での入力の場合、出品できない' do
         @item.price = 'あいうえお'
       end
@@ -73,6 +65,11 @@ RSpec.describe Item, type: :model do
       end
       it '価格が全角漢字での入力の場合、出品できない' do
         @item.price = '亜井于絵尾'
+      end
+      it '価格がなければ出品出来ない' do
+        @item.price = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格が半角英数混合での入力の場合、登録できない' do
         @item.price = 'abc123'
