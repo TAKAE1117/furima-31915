@@ -5,11 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   with_options presence: true do
-    validates :password, length: { minimum: 6}
+    validates :password, length: { minimum: 6 }
     validates :nickname
     validates :last_name_kanji
     validates :first_name_kanji
-    validates :last_name_kana 
+    validates :last_name_kana
     validates :first_name_kana
     validates :birthday
   end
@@ -27,5 +27,4 @@ class User < ApplicationRecord
     validates :last_name_kana
     validates :first_name_kana
   end
-
 end

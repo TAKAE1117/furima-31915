@@ -24,13 +24,13 @@
 | ------------ | ---------- | ----------------- |
 | title        | string     | null: false       |
 | description  | text       | null: false       |
-| category _id | integer    | null: false       |
+| category_id  | integer    | null: false       |
 | state_id     | integer    | null: false       |
 | fee_id       | integer    | null: false       |
 | area_id      | integer    | null: false       |
 | day_id       | integer    | null: false       |
 | price        | integer    | null: false       |
-| user         | references | foreign_key :true |
+| user         | references | foreign_key: true |
 
 ### Association
 

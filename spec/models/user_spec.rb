@@ -6,13 +6,12 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザー新規登録' do
-
     context '新規登録ができるとき' do
       it 'nickname,email,passwword,password_confirmation,last_name_kanji,first_name_kanji,last_name_kana ,first_name_kana,birthdayが存在すれば登録できる' do
         expect(@user).to be_valid
       end
       it 'emailに@が含まれていれば登録できる' do
-        @user.email = 'test@test.com' 
+        @user.email = 'test@test.com'
         expect(@user).to be_valid
       end
       it 'passwordが6文字以上であれば登録できる' do
@@ -114,22 +113,22 @@ RSpec.describe User, type: :model do
       it 'last_name_kanjiが漢字・平仮名・カタカナ以外では登録できない' do
         @user.last_name_kanji = '111aaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name kanji is invalid")
+        expect(@user.errors.full_messages).to include('Last name kanji is invalid')
       end
       it 'first_name_kanjiが漢字・平仮名・カタカナ以外では登録できない' do
         @user.first_name_kanji = '111aaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kanji is invalid")
+        expect(@user.errors.full_messages).to include('First name kanji is invalid')
       end
       it 'last_name_kanaが全角カタカナ以外では登録できない' do
         @user.last_name_kanji = '111aaaあああ亜嗚呼'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name kanji is invalid")
+        expect(@user.errors.full_messages).to include('Last name kanji is invalid')
       end
       it 'first_name_kanaが全角カタカナ以外では登録できない' do
         @user.first_name_kanji = '111aaaあああ亜嗚呼'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kanji is invalid")
+        expect(@user.errors.full_messages).to include('First name kanji is invalid')
       end
       it 'birthdayが空では登録できない' do
         @user.birthday = ''
