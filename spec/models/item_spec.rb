@@ -7,35 +7,11 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品機能' do
     context '出品が出来る場合' do
-      it '商品画像があれば出品できる' do
-        expect(@item).to be_valid
-      end
-      it '商品名があれば出品できる' do
-        expect(@item).to be_valid
-      end
-      it '商品の説明があれば出品できる' do
-        expect(@item).to be_valid
-      end
-      it 'カテゴリーidが2〜11で選択されていれば出品できる' do
-        expect(@item).to be_valid
-      end
-      it '商品の状態idが2〜7で選択されていれば出品できる' do
-        expect(@item).to be_valid
-      end
-      it '配送料idが2〜3で選択されていれば出品できる' do
-        expect(@item).to be_valid
-      end
-      it '発送元の地域idが2〜48で選択されていれば出品できる' do
-        expect(@item).to be_valid
-      end
-      it '発送までの日数idが2〜4で選択されていれば出品できる' do
+      it '全ての項目が入力されていれば出品できる' do
         expect(@item).to be_valid
       end
       it '価格が半角数値のみであれば出品できる' do
-        @item.price = '123456'
-        expect(@item).to be_valid
-      end
-      it '価格が¥300〜¥9,999,999の範囲であれば出品できる' do
+        @item.price = 123456
         expect(@item).to be_valid
       end
     end
@@ -81,21 +57,36 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Day must be other than 1')
       end
-      it '価格が平仮名・カタカナ・漢字・英字の場合出品できない' do
+      # it '価格が平仮名・カタカナ・漢字・英字の場合出品できない' do
+      #   @item.price = 'あいうえお'
+      #   @item.price = 'アイウエオ'
+      #   @item.price = '亜井于絵尾'
+      #   @item.price = 'aiueo'
+      #   @item.valid?
+      #   expect(@item.errors.full_messages).to include('Price is not a number')
+      # end
+      it '価格が全角平仮名での入力の場合、出品できない' do
         @item.price = 'あいうえお'
+      end
+      it '価格が全角カタカナでの入力の場合、出品できない' do
         @item.price = 'アイウエオ'
+      end
+      it '価格が全角漢字での入力の場合、出品できない' do
         @item.price = '亜井于絵尾'
-        @item.price = 'aiueo'
-        @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+      it '価格が半角英数混合での入力の場合、登録できない' do
+        @item.price = 'abc123'
+      end
+      it '価格が半角英語だけでの入力の場合、出品出来ない' do
+        @item.price = 'abc'
       end
       it '価格が¥300〜¥9,999,999の範囲でなければ出品できない' do
-        @item.price = '150'
+        @item.price = 150
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it '価格が¥300〜¥9,999,999の範囲でなければ出品できない' do
-        @item.price = '1000000000'
+        @item.price = 1000000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
