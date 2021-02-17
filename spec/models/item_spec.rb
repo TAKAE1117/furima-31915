@@ -59,12 +59,18 @@ RSpec.describe Item, type: :model do
       end
       it '価格が全角平仮名での入力の場合、出品できない' do
         @item.price = 'あいうえお'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格が全角カタカナでの入力の場合、出品できない' do
         @item.price = 'アイウエオ'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格が全角漢字での入力の場合、出品できない' do
         @item.price = '亜井于絵尾'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格がなければ出品出来ない' do
         @item.price = ''
@@ -73,9 +79,13 @@ RSpec.describe Item, type: :model do
       end
       it '価格が半角英数混合での入力の場合、登録できない' do
         @item.price = 'abc123'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格が半角英語だけでの入力の場合、出品出来ない' do
         @item.price = 'abc'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格が¥300〜¥9,999,999の範囲でなければ出品できない' do
         @item.price = 150
