@@ -27,7 +27,7 @@
       <% if current_user.id == @item.user_id %>
         <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
-        <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
+        <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
       <%#  33行目のコードですが、商品購入気機能のタスクが終わっていないため、実装できていません。%>
       <%# 「ログイン状態の出品者でも、売却済みの商品に対しては「編集・削除ボタン」が表示されないこと」の実装条件は、商品購入気機能のタスクを実装する段階で行います。 %>
       <% elsif %>
