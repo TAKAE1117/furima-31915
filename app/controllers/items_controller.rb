@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   def show
   end
 
-  def edit 
+  def edit
   end
 
   def update
