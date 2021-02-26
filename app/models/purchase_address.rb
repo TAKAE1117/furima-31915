@@ -14,4 +14,7 @@ class PurchaseAddredd
     validates :prefecture_id
   end
   
+  def save
+    Address.create(postal_code: postal_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building_name: building_name, phone_number: phone_number)
+  end
 end
