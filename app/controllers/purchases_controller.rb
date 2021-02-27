@@ -1,13 +1,7 @@
 class PurchasesController < ApplicationController
   def index
     @purchase_address = PurchaseAddress.new
-    # @purchase_address = PurchaseAddress.new(purchase_address_params)
-    # @item = Item.new(params[:id])
   end
-
-  # def new
-  #   @purchase_address = PurchaseAddress.new(purchase_address_params)
-  # end
   
   # def create
   #   @purchase_address = PurchaseAddress.new(purchase_address_params)
