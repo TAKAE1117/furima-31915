@@ -1,2 +1,25 @@
 class PurchasesController < ApplicationController
+  def index
+  end
+
+  def new
+    @purchase_address = PurchaseAddress.new(purchase_address_params)
+  end
+  
+  def create
+    @purchase_address = PurchaseAddress.new(purchase_address_params)
+    if @purchase_address.valid?
+      @purchase_address.save
+      redirect_to action: :index
+    else
+      render action: :new
+    end
+  end
+
+  private
+
+  def purchase_address_params
+    params.require(:PurchaseAddress).permit(:postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number)
+  end
+
 end
