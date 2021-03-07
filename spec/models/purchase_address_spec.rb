@@ -7,7 +7,7 @@ RSpec.describe PurchaseAddress, type: :model do
     end
 
     context '商品を購入できる' do
-      it '建物名以外の全ての値が含まれていれば購入できる' do
+      it '全ての値が含まれていれば購入できる' do
         expect(@purchase_address).to be_valid
       end
 
@@ -18,6 +18,11 @@ RSpec.describe PurchaseAddress, type: :model do
 
       it '電話番号が半角数値と11桁以内であれば購入できる' do
         @purchase_address.phone_number = '09012345678'
+        expect(@purchase_address).to be_valid
+      end
+
+      it '建物名が空でも購入できる' do
+        @purchase_address.building_name = nil
         expect(@purchase_address).to be_valid
       end
     end
@@ -90,6 +95,22 @@ RSpec.describe PurchaseAddress, type: :model do
 
       it '電話番号が11桁以内でなければ購入できない' do
         @purchase_address.phone_number = '090123456789'
+        @purchase_address.valid?
+      end
+
+      it '電話番号が半角英数値金剛であれば購入できない' do
+        @purchase_address.phone_number = '090abcd5678'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include('Phone number Phone number is invalid')
+      end
+
+      it 'user_idが空であれば購入できない' do
+        @purchase_address.user_id = nil
+        @purchase_address.valid?
+      end
+
+      it 'item_idが空であれば購入できない' do
+        @purchase_address.item_id = nil
         @purchase_address.valid?
       end
 

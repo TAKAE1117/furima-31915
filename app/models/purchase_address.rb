@@ -9,6 +9,8 @@ class PurchaseAddress
     validates :address
     validates :phone_number, format: { with: /\A[0-9]+\z/, message: 'Phone number is invalid' }
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   with_options numericality: { other_than: 1 } do
