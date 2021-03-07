@@ -7,7 +7,7 @@ class PurchaseAddress
     validates :prefecture_id
     validates :municipality
     validates :address
-    validates :phone_number
+    validates :phone_number,  format: { with: /\A[0-9]+\z/, message: "Phone number is invalid" }
     validates :token
   end
 
