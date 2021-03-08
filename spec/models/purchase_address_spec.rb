@@ -100,7 +100,7 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
       end
 
-      it '電話番号が半角英数値金剛であれば購入できない' do
+      it '電話番号が半角英数値混合であれば購入できない' do
         @purchase_address.phone_number = '090abcd5678'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include('Phone number Phone number is invalid')
